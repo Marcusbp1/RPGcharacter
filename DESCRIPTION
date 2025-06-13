@@ -2,7 +2,7 @@ Package: RPGcharacter
 Type: Package
 Title: Create and Manage RPG Game Characters
 Version: 0.1.0
-Authors@R: person("Marcus", "Basse", email = "QX37JC@student.aau.dk", role = c("aut", "cre"))
+Authors@R: person("Marcus", "Martin", "Jens Peter", email = "QX37JC@student.aau.dk", role = c("aut", "cre"))
 Description: This package allows users to create, customize, and manage role-playing 
     game characters. Features include character creation, XP and level tracking, 
     stat upgrades, and visual progress plotting.
