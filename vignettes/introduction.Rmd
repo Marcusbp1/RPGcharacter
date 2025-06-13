@@ -1,0 +1,79 @@
+
+---
+title: "Introduction to RPGcharacter"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Introduction to RPGcharacter}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+# Welcome to RPGcharacter!
+
+The **RPGcharacter** package helps you create and manage RPG game characters
+with simple commands.
+
+## Creating a Character
+
+Use the `create_character()` function to interactively create a character:
+
+```{r, eval=FALSE}
+library(RPGcharacter)
+hero <- create_character()
+```
+
+## Summary for a Character
+
+Use the `summary()` function to get a summary of the character's stats:
+```{r, eval=FALSE}
+library(RPGcharacter)
+summary(hero)
+```
+
+## Plot the Experience bar for the Character
+
+use the `plot()` function to get a plot of the XP bar 
+```{r, eval=FALSE}
+library(RPGcharacter)
+plot(hero)
+```
+
+## Print information about the Character
+
+use the `print()` function to get information about the character
+```{r, eval=FALSE}
+library(RPGcharacter)
+print(hero)
+```
+
+## Give the Character intial stats 
+
+use the `Determine_stats(race,class)` function to give the character initial 
+stats.
+The function is automatically used in `create_character()` function
+```{r, eval=FALSE}
+library(RPGcharacter)
+Determine_stats("Orc", "Mage")
+```
+
+## Update the stats of the Character as it levels up
+
+use the `Update_stats()` function to interactively update stats
+```{r, eval=FALSE}
+library(RPGcharacter)
+hero <- Update_stats(hero)
+```
+
+
+
+## Update the Character's XP and level
+
+use the `level_XP_update()` function, to interactively give the character XP
+```{r, eval=FALSE}
+library(RPGcharacter)
+hero <- level_XP_update(hero,250)
+```
+
+
+
+

@@ -1,0 +1,16 @@
+Package: RPGcharacter
+Type: Package
+Title: Create and Manage RPG Game Characters
+Version: 0.1.0
+Authors@R: person("Marcus", "Basse", email = "QX37JC@student.aau.dk", role = c("aut", "cre"))
+Description: This package allows users to create, customize, and manage role-playing 
+    game characters. Features include character creation, XP and level tracking, 
+    stat upgrades, and visual progress plotting.
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 7.2.3
+Suggests: 
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr
