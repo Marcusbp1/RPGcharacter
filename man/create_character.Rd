@@ -4,7 +4,7 @@
 \alias{create_character}
 \title{Main function to create the character}
 \usage{
-create_character()
+create_character(name = NULL, race = NULL, class = NULL)
 }
 \value{
 An object of class \code{gamecharacter}

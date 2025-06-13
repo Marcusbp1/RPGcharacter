@@ -12,21 +12,27 @@
 #'
 #' @examples
 #' hero <- create_character()
-create_character <- function() {
+create_character <- function(name = NULL, race = NULL, class = NULL) {
   cat("👤 Welcome to Character Creation!\n")
 
   # Ask for name
-  name <- readline(prompt = "Enter your character's name: ")
+  if (is.null(name)) {
+    name <- readline(prompt = "Enter your character's name: ")
+  }
 
-  # Ask for race
-  cat("Choose your race:\n1: Orc\n2: Human\n")
-  race_input <- readline(prompt = "Race (1 or 2): ")
-  race <- ifelse(race_input == "1", "Orc", "Human")
+  # Ask for race if not provided
+  if (is.null(race)) {
+    cat("Choose your race:\n1: Orc\n2: Human\n")
+    race_input <- readline(prompt = "Race (1 or 2): ")
+    race <- ifelse(race_input == "1", "Orc", "Human")
+  }
 
-  # Ask for class
-  cat("Choose your class:\n1: Warrior\n2: Mage\n")
-  class_input <- readline(prompt = "Class (1 or 2): ")
-  class <- ifelse(class_input == "1", "Warrior", "Mage")
+  # Ask for class if not provided
+  if (is.null(class)) {
+    cat("Choose your class:\n1: Warrior\n2: Mage\n")
+    class_input <- readline(prompt = "Class (1 or 2): ")
+    class <- ifelse(class_input == "1", "Warrior", "Mage")
+  }
 
   # Generate stats
   stats <- Determine_stats(race, class)
@@ -49,6 +55,7 @@ create_character <- function() {
 
   return(obj)
 }
+
 
 
 #### Stat determining at level 1 -------------------------------------------####
@@ -113,23 +120,31 @@ Determine_stats <- function(race, class) {
 #' Strength  | 2
 #' Intellect | 6
 #' ===========================
-summary.gamecharacter <- function(obj) {
-  # Checks class
-  if (!inherits(obj, "gamecharacter"))
-    stop("Object is not of class 'gamecharacter'.")
+summary.gamecharacter <- function(object) {
+  cat("Character Summary\n")
+  cat("===========================\n")
+  cat("Name      |", object$name, "\n")
+  cat("Race      |", object$race, "\n")
+  cat("Class     |", object$class, "\n")
+  cat("Level     |", object$level, "\n")
+  cat("HP        |", object$hp, "\n")
+  cat("Strength  |", object$strength, "\n")
+  cat("Intellect |", object$intellect, "\n")
+  cat("===========================\n")
 
-  cat("
-Character Summary
-===========================
-Name      |", obj$name, "
-Race      |", obj$race, "
-Class     |", obj$class, "
-Level     |", obj$level, "
-HP        |", obj$hp, "
-Strength  |", obj$strength, "
-Intellect |", obj$intellect, "
-===========================\n")
+  invisible(
+    list(
+      name = object$name,
+      race = object$race,
+      class = object$class,
+      level = object$level,
+      hp = object$hp,
+      strength = object$strength,
+      intellect = object$intellect
+    )
+  )
 }
+
 
 #### Update stats: ---------------------------------------------------------####
 
@@ -142,17 +157,26 @@ Intellect |", obj$intellect, "
 #'
 #' @examples
 #' my_hero <- Update_stats(my_hero)
-Update_stats <- function(obj) {
+Update_stats <- function(obj, choices = NULL) {
   if (!inherits(obj, "gamecharacter")) stop("Object is not of class 'gamecharacter'.")
 
   if (obj$point > 0) {
     cat("🛠️  Use your stat points to upgrade attributes.\n")
 
-    for (i in 1:obj$point) {
+    for (i in seq_len(obj$point)) {
       cat("\nStat points left:", obj$point - i + 1, "\n")
       cat("Allocate point to:\n  1: Strength\n  2: Intellect\n")
 
-      point_input <- readline(prompt = "Choose (1 or 2): ")
+      if (is.null(choices)) {
+        point_input <- readline(prompt = "Choose (1 or 2): ")
+      } else {
+        if (i <= length(choices)) {
+          point_input <- as.character(choices[i])
+          cat("Auto-selected:", point_input, "\n")
+        } else {
+          point_input <- "0"  # invalid input if not enough choices
+        }
+      }
 
       if (point_input == "1") {
         obj$strength <- obj$strength + 2
@@ -164,6 +188,7 @@ Update_stats <- function(obj) {
         cat("❌ Invalid input. No point allocated.\n")
       }
     }
+
     obj$point <- 0  # Reset stat points after use
   } else {
     cat("⚠️  No stat points available.\n")
@@ -245,7 +270,7 @@ plot.gamecharacter <- function(obj) {
        col = "lightgray", border = NA)
 
   # Add level labels
-  text(x = 50, y = 0.8, labels = "→", cex = 1.5)
+  text(x = 50, y = 0.8, labels = "->", cex = 1.5)
   text(x = 0, y = 0.8, labels = paste("Lvl", obj$level), adj = 0, cex = 1.2)
   text(x = total_xp, y = 0.8, labels = paste("Lvl", obj$level + 1),
        adj = 1, cex = 1.2)

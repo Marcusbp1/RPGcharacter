@@ -4,7 +4,7 @@
 \alias{Update_stats}
 \title{Update character stats using available points}
 \usage{
-Update_stats(obj)
+Update_stats(obj, choices = NULL)
 }
 \arguments{
 \item{obj}{A gamecharacter object.}

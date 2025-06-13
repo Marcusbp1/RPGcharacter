@@ -12,7 +12,8 @@ LazyData: true
 RoxygenNote: 7.2.3
 Suggests: 
     knitr,
-    rmarkdown
+    rmarkdown, 
+    tinytest
 VignetteBuilder: knitr
 URL: https://github.com/Marcusbp1/RPGcharacter
 BugReports: https://github.com/Marcusbp1/RPGcharacter/issues
